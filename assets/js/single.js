@@ -1,5 +1,14 @@
 var limitWarningEl = document.querySelector("#limit-warning");
 var issueContainerEl = document.querySelector("#issues-container");
+var repoNameEl = document.querySelector("#repo-name");
+
+
+var getRepoName = function(){
+    var queryString = document.location.search;
+    var repoName = queryString.split("=")[1];
+    getRepoIssues(repoName);
+    repoNameEl.textContent = repoName;
+}
 
 var displayWarning = function(repo) {
     // add text to warning container
@@ -10,7 +19,6 @@ var displayWarning = function(repo) {
     linkEl.setAttribute("target", "_blank");
     // append to warning container
     limitWarningEl.appendChild(linkEl);
-    console.log("And I ran this function!")
 };
 
 var displayIssues = function(issues) {
@@ -53,7 +61,6 @@ var getRepoIssues = function(repo) {
                 displayIssues(data);
                 // check if api has paginated issues
                 if (response.headers.get("Link")) {
-                    console.log("I made it to the condition for the warning")
                     displayWarning(repo);
                 }
             });
@@ -64,6 +71,6 @@ var getRepoIssues = function(repo) {
     });
 };
 
+getRepoName();
 
 
-getRepoIssues("Craig5117/git-it-done");
