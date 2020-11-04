@@ -59,6 +59,7 @@ var displayIssues = function(issues) {
 
 var getRepoIssues = function(repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
+    console.log(repo);
     fetch(apiUrl).then(function(response) {
         // request was successful
         if (response.ok) {
